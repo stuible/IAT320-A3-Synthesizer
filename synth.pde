@@ -8,8 +8,7 @@ class ToneInstrument implements Instrument
   // constructor for this instrument
   ToneInstrument( int note, float amplitude )
   {    
-    //midi.setMidiNoteIn(newNote);
-    
+
     // create new instances of any UGen objects as necessary
     sineOsc = new Oscil( 440, amplitude, Waves.SAW );
     adsr = new ADSR( 0.9, 0.01, 0.05, 0.05, 0.5 );
@@ -17,12 +16,7 @@ class ToneInstrument implements Instrument
     midi = new Midi2Hz( note );
     midi.patch( sineOsc.frequency );
     
-    //sineOsc.patch( moog1 ).patch( out );
-
-    // patch everything together up to the final output
-    //wave.patch( moog1 ).patch( out );
     sineOsc.patch( adsr );
-    //sineOsc.patch( moog1 );
     
   }
 

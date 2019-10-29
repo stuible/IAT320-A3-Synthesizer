@@ -7,3 +7,9 @@ public int getRandomIntArrayIndex(int[] myArray){
   int rand = (int)random(myArray.length);
   return rand;
 }
+
+static final float arrayAverage(float... arr) {
+  float sum = 0;
+  for (float f: arr)  sum += f;
+  return sum/arr.length;
+}
