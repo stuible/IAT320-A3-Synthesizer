@@ -32,14 +32,14 @@ class ToneInstrument implements Instrument
     // turn on the ADSR
     adsr.noteOn();
     // patch to the output
-    adsr.patch( moog1 ).patch( out );
+    adsr.patch( moog1 );
   }
 
   // every instrument must have a noteOff() method
   void noteOff()
   {
     // tell the ADSR to unpatch after the release is finished
-    adsr.unpatchAfterRelease( out );
+    adsr.unpatchAfterRelease( moog1 );
     // call the noteOff 
     adsr.noteOff();
   }

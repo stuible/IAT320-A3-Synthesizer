@@ -17,6 +17,8 @@ String prevBuffer;
 
 boolean noBTMode = true;
 
+boolean isMajor = false;
+
 int time;
 
 void setup()
@@ -41,7 +43,7 @@ void setup()
   //midi = new Midi2Hz( 50 );
   //midi.patch( wave.frequency );
   
-  //wave.patch( moog1 ).patch( out );
+  moog1.patch( out );
   
   try {
     //println(Serial.list()); 
