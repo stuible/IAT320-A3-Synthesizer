@@ -17,6 +17,8 @@ String prevBuffer;
 boolean noBTMode = true;
 
 boolean isMajor = false;
+int noteType = 4; // 1 = Whotenote, 2 = Halfnte, 4 = Quarternote, etc
+int BPM = 140;
 
 int time;
 
@@ -66,7 +68,8 @@ void draw()
     line( i, 150 - out.right.get(i)*50, i+1, 150 - out.right.get(i+1)*50 );
   }
   
-  if (millis() > time + 125)
+  // Triger new note based on BPM and note type
+  if (millis() > time + ((60000 / (BPM / 2)) / noteType))
   {
     playRandomNote();
     time = millis();
