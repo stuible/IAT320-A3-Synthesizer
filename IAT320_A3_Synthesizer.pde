@@ -4,7 +4,6 @@ import ddf.minim.ugens.*;
 
 Minim       minim;
 AudioOutput out;
-Oscil       wave;
 MoogFilter  moog1; 
 
 
@@ -32,16 +31,9 @@ void setup()
   // use the getLineOut method of the Minim object to get an AudioOutput object
   out = minim.getLineOut();
   
-  // create a sine wave Oscil, set to 440 Hz, at 0.5 amplitude
-  //wave = new Oscil( 440, 0.5f, Waves.SINE );
-  // patch the Oscil to the output
   
   moog1    = new MoogFilter( 1200, 0.9 );  
   moog1.type = MoogFilter.Type.LP;
-  
-  // make our midi converter
-  //midi = new Midi2Hz( 50 );
-  //midi.patch( wave.frequency );
   
   moog1.patch( out );
   
@@ -141,11 +133,9 @@ void mouseMoved()
   // an x-y control for them.
   
   //float amp = map( mouseY, 0, height, 1, 0 );
-  //wave.setAmplitude( amp );
   
   float filterFreq = map( mouseY, 0, height, 10, 5000 );
   if(noBTMode) moog1.frequency.setLastValue(filterFreq);
   
   //float freq = map( mouseX, 0, width, 40, 880 );
-  //if(noBTMode) wave.setFrequency( freq );
 }
