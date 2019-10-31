@@ -19,7 +19,7 @@ void playRandomNote() {
     }
     if (playPunch){
       println("PLAY Punch");
-      out.playNote( 0, 1, new PunchInstrument( newNote + 13, 1f ) );
+      out.playNote( 0, 10, new PunchInstrument( newNote - 12, 1f ) );
       playPunch = false;
     }
   }

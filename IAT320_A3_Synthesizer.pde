@@ -17,9 +17,18 @@ boolean noBTMode = true;
 
 boolean isMajor = false;
 int noteType = 8; // 1 = Whotenote, 2 = Halfnte, 4 = Quarternote, etc
-float BPM = 140;
+float BPM = 120;
+
+float targetBPM = BPM;
 
 boolean playDab = false;
+boolean playPunch = false;
+
+int timeSinceLastMovement = 0;
+
+int timeSinceRemovedMovement = 0;
+
+ArrayList<Float>  movementArray = new ArrayList<Float>();  
 
 int time;
 
@@ -76,6 +85,25 @@ void draw()
     time = millis();
   }
 
+  //Slow down BPM to idle tempo if there hasn't been movement for 5 seconds
+  if (millis() > timeSinceLastMovement + 5000)  targetBPM = 100;
+
+  if (millis() > timeSinceRemovedMovement + 1000) {
+    if (movementArray.size() != 0) movementArray.remove(0);
+    timeSinceRemovedMovement = millis();
+    println(movementArray.size());
+  }
+
+  float filterFreq = map( movementArray.size(), 0, 30, 10, 5000 );
+  moog1.frequency.setLastValue(filterFreq);
+
+  if (BPM != targetBPM) {
+    if (targetBPM > BPM) BPM += 0.5;
+    else if (targetBPM < BPM) BPM -= 0.25;
+    println("Changed BPM: " + BPM);
+    println("Taget BPM: " + targetBPM);
+  }
+
 
 
   if (serial != null) {
@@ -100,14 +128,20 @@ void draw()
             if (json.hasKey("gMov")) {
               float gMov = json.getFloat("gMov");
               println(gMov);
+              movementArray.add(gMov);
 
-              BPM = map(gMov, 0, 10, 80, 160);
+              targetBPM = (int) map(arrayListAverage(movementArray), 0, 10, 70, 200);
+
+              timeSinceLastMovement = millis();
+
+              
             }
 
             if (json.hasKey("action")) {
               String action = json.getString("action");
 
               if (action.equals("dab")) playDab = true;
+              if (action.equals("punch")) playPunch = true;
             }
 
             //JSONObject mag = json.getJSONObject("mag");

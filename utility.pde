@@ -13,3 +13,14 @@ static final float arrayAverage(float... arr) {
   for (float f: arr)  sum += f;
   return sum/arr.length;
 }
+
+public float arrayListAverage(ArrayList <Float> marks) {
+  Float sum = 0.0;
+  if(!marks.isEmpty()) {
+    for (Float mark : marks) {
+        sum += mark;
+    }
+    return sum / marks.size();
+  }
+  return sum;
+}

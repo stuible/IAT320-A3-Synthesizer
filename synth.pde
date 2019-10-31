@@ -58,7 +58,7 @@ class PunchInstrument implements Instrument
 
     // create new instances of any UGen objects as necessary
     sineOsc = new Oscil( 440, amplitude, Waves.SAW );
-    adsr = new ADSR( 0.9, 0.5, 0.05, 0.05, 0.5 );
+    adsr = new ADSR( 1, 0.01, 2.0, 3.0, 1.0 );
     
     midi = new Midi2Hz( note );
     midi.patch( sineOsc.frequency );
