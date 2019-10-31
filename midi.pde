@@ -11,10 +11,10 @@ void playRandomNote() {
 
   if (prevNote == newNote) playRandomNote();
   else {
-    out.playNote( 0, 1, new ToneInstrument( newNote, 0.25f ) );
+    out.playNote( 0, 1, new PluckInstrument( newNote, 0.25f ) );
     if (playDab){
       println("PLAY DAB");
-      out.playNote( 1, 1, new ToneInstrument( newNote + 13, 1f ) );
+      out.playNote( 0, 1, new PluckInstrument( newNote + 13, 1f ) );
       playDab = false;
     }
   }

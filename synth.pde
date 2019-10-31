@@ -1,4 +1,4 @@
-class ToneInstrument implements Instrument
+class PluckInstrument implements Instrument
 {
   // create all variables that must be used througout the class
   Oscil sineOsc;
@@ -6,7 +6,7 @@ class ToneInstrument implements Instrument
   Midi2Hz midi;
 
   // constructor for this instrument
-  ToneInstrument( int note, float amplitude )
+  PluckInstrument( int note, float amplitude )
   {    
     //println("instantiating note");
 
