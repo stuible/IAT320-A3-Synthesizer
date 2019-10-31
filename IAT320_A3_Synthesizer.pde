@@ -28,13 +28,17 @@ int timeSinceLastMovement = 0;
 
 int timeSinceRemovedMovement = 0;
 
+int timeSinceDab = 0;
+int timeSincePunch = 0;
+
 ArrayList<Float>  movementArray = new ArrayList<Float>();  
 
 int time;
 
 void setup()
 {
-  size(512, 200, P3D);
+  size(1000, 750, P3D);
+  setupUI();
 
   time = millis();
 
@@ -70,6 +74,8 @@ void draw()
   background(0);
   stroke(255);
   strokeWeight(1);
+  
+  drawUI();
 
   // draw the waveform of the output
   for (int i = 0; i < out.bufferSize() - 1; i++)
@@ -133,15 +139,19 @@ void draw()
               targetBPM = (int) map(arrayListAverage(movementArray), 0, 10, 70, 200);
 
               timeSinceLastMovement = millis();
-
-              
             }
 
             if (json.hasKey("action")) {
               String action = json.getString("action");
-
-              if (action.equals("dab")) playDab = true;
-              if (action.equals("punch")) playPunch = true;
+             
+              if (action.equals("dab")){
+                playDab = true;
+                timeSinceDab = millis();
+              }
+              if (action.equals("punch")){
+                playPunch = true;
+                timeSincePunch = millis();
+              }
             }
 
             //JSONObject mag = json.getJSONObject("mag");
