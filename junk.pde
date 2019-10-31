@@ -26,7 +26,7 @@ void keyPressed()
     //  break;
       
     //case '5':
-    //  wave.setWaveform( Waves.QUARTERPULSE );
+    //  out.playNote( 1, 1, new ToneInstrument( 60, 0.25f ) );
     //  break;
      
     default: break; 

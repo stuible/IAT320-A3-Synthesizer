@@ -8,6 +8,7 @@ class ToneInstrument implements Instrument
   // constructor for this instrument
   ToneInstrument( int note, float amplitude )
   {    
+    //println("instantiating note");
 
     // create new instances of any UGen objects as necessary
     sineOsc = new Oscil( 440, amplitude, Waves.SAW );
@@ -18,15 +19,19 @@ class ToneInstrument implements Instrument
     
     sineOsc.patch( adsr );
     
+    //println("FINISHED instantiating note");
+    
   }
 
   // every instrument must have a noteOn( float ) method
   void noteOn( float dur )
   {
+    println("about to send out note");
     // turn on the ADSR
     adsr.noteOn();
     // patch to the output
     adsr.patch( moog1 );
+    println("DONE send out note");
   }
 
   // every instrument must have a noteOff() method
