@@ -6,18 +6,17 @@ Minim       minim;
 AudioOutput out;
 MoogFilter  moog1; 
 
-
 Serial serial;
 
 float[] magValues;
 int magIndex = 0;
 
-String prevBuffer;
+String serialBuffer;
 
 boolean noBTMode = true;
 
 boolean isMajor = false;
-int noteType = 4; // 1 = Whotenote, 2 = Halfnte, 4 = Quarternote, etc
+int noteType = 8; // 1 = Whotenote, 2 = Halfnte, 4 = Quarternote, etc
 int BPM = 140;
 
 int time;
@@ -41,7 +40,7 @@ void setup()
   
   try {
     //println(Serial.list()); 
-    serial = new Serial(this, Serial.list()[1], 38400);
+    serial = new Serial(this, Serial.list()[1], 9600);
     println("OPENING PORT");
     //s.write('0');
   }
@@ -52,7 +51,7 @@ void setup()
   
   magValues = new float[10];
   
-  prevBuffer = "";
+  serialBuffer = "";
 }
 
 void draw()
@@ -84,42 +83,43 @@ void draw()
        //println("here is the buffer:");
       //println(inBuffer);
 
-      
-      try {
-        float magVal = Float.parseFloat(prevBuffer + inBuffer);
-        
-        magValues[magIndex] = magVal;
-        if(magIndex >= 9) magIndex = 0;
-        else magIndex++;
-        
-        float avg = arrayAverage(magValues);
-        float filterFreq = constrain(map(avg, -70, 300, 10, 5000 ), 10, 5000);
-        moog1.frequency.setLastValue(filterFreq);
-        
-        ////print("Mag Val");
-        println(magVal);
-        //print("Mag AVG");
-        //println(avg);
-        
-      } catch (NumberFormatException e) {
+      serialBuffer += inBuffer;
 
-      }
-      
-      
-      //int magVal = Integer.parseInt(inBuffer);
-      //println(magVal);
-      
-      prevBuffer = inBuffer;
-      
-      if(inBuffer.endsWith("\n")){
-         //print("Broken: '");
-         //println(inBuffer + "'");
-         prevBuffer = "";
+      //Recived completed json object
+      if(serialBuffer.endsWith("\n")){
+         //print(serialBuffer);
+         
+         JSONObject json = serialBuffer.startsWith("{") ? parseJSONObject(serialBuffer) : null;
+        if (json == null) {
+          println("JSONObject could not be parsed");
+        } else {
+          JSONObject mag = json.getJSONObject("mag");
+          JSONObject acc = json.getJSONObject("acc");
+          
+          //println("x: " + String.valueOf(constrain(mag.getInt("x"), 0, 300)));
+          //println("y: " + String.valueOf(constrain(mag.getInt("y"), 0, 300)));
+          //println("z: " + String.valueOf(constrain(mag.getInt("z"), 0, 300)));
+        
+        if(mag != null) {float[] magArray = {mag.getInt("x"), mag.getInt("y"), mag.getInt("z")};}
+        
+        if(acc != null){
+          JSONArray qmove = acc.getJSONArray("qmove");
+          
+          if(qmove != null){ isMajor = true; println("moved");}
+          //else{ isMajor = false; println(qmove.getString(0));}
+        }
+        
+        
+        //float filterFreq = constrain(map(avg, -35, 300, 10, 5000 ), 10, 5000);
+        //moog1.frequency.setLastValue(filterFreq);
+        }
+         
+         //Reset buffer
+         serialBuffer = "";
       }
       else {
-        //print("Valid: '");
-        // println(inBuffer + "'");
-        prevBuffer = inBuffer;
+        //println("Buffer not ready:");
+        //println(serialBuffer);
       }
     }
   }

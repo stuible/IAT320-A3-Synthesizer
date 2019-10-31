@@ -32,3 +32,55 @@ void keyPressed()
     default: break; 
   }
 }
+
+
+void dontneed(){
+  //if(serial != null){
+  //  while (serial.available() > 0) {
+  //  String inBuffer = serial.readString();   
+  //  if (inBuffer != null) {
+  //     //println("here is the buffer:");
+  //    //println(inBuffer);
+
+      
+  //    try {
+  //      float magVal = Float.parseFloat(prevBuffer + inBuffer);
+        
+  //      magValues[magIndex] = magVal;
+  //      if(magIndex >= 9) magIndex = 0;
+  //      else magIndex++;
+        
+  //      float avg = arrayAverage(magValues);
+  //      float filterFreq = constrain(map(avg, -70, 300, 10, 5000 ), 10, 5000);
+  //      moog1.frequency.setLastValue(filterFreq);
+        
+  //      ////print("Mag Val");
+  //      println(magVal);
+  //      //print("Mag AVG");
+  //      //println(avg);
+        
+  //    } catch (NumberFormatException e) {
+
+  //    }
+      
+      
+  //    //int magVal = Integer.parseInt(inBuffer);
+  //    //println(magVal);
+      
+  //    prevBuffer = inBuffer;
+      
+  //    if(inBuffer.endsWith("\n")){
+  //       //print("Broken: '");
+  //       //println(inBuffer + "'");
+  //       prevBuffer = "";
+  //    }
+  //    else {
+  //      //print("Valid: '");
+  //      // println(inBuffer + "'");
+  //      prevBuffer = inBuffer;
+  //    }
+  //  }
+  //}
+  //}
+  
+}
