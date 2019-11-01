@@ -1,3 +1,5 @@
+/* Just for fun key change functionality */
+
 void keyPressed()
 { 
   switch( key )
@@ -33,54 +35,14 @@ void keyPressed()
   }
 }
 
+//Previously used mouseMove mapping for filter debugging
+//void mouseMoved()
+//{
 
-void dontneed(){
-  //if(serial != null){
-  //  while (serial.available() > 0) {
-  //  String inBuffer = serial.readString();   
-  //  if (inBuffer != null) {
-  //     //println("here is the buffer:");
-  //    //println(inBuffer);
+//  //float amp = map( mouseY, 0, height, 1, 0 );
 
-      
-  //    try {
-  //      float magVal = Float.parseFloat(prevBuffer + inBuffer);
-        
-  //      magValues[magIndex] = magVal;
-  //      if(magIndex >= 9) magIndex = 0;
-  //      else magIndex++;
-        
-  //      float avg = arrayAverage(magValues);
-  //      float filterFreq = constrain(map(avg, -70, 300, 10, 5000 ), 10, 5000);
-  //      moog1.frequency.setLastValue(filterFreq);
-        
-  //      ////print("Mag Val");
-  //      println(magVal);
-  //      //print("Mag AVG");
-  //      //println(avg);
-        
-  //    } catch (NumberFormatException e) {
+//  float filterFreq = map( mouseY, 0, height, 10, 5000 );
+//  if (noBTMode) moog1.frequency.setLastValue(filterFreq);
 
-  //    }
-      
-      
-  //    //int magVal = Integer.parseInt(inBuffer);
-  //    //println(magVal);
-      
-  //    prevBuffer = inBuffer;
-      
-  //    if(inBuffer.endsWith("\n")){
-  //       //print("Broken: '");
-  //       //println(inBuffer + "'");
-  //       prevBuffer = "";
-  //    }
-  //    else {
-  //      //print("Valid: '");
-  //      // println(inBuffer + "'");
-  //      prevBuffer = inBuffer;
-  //    }
-  //  }
-  //}
-  //}
-  
-}
+//  //float freq = map( mouseX, 0, width, 40, 880 );
+//}

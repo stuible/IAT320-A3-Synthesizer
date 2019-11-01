@@ -1,3 +1,5 @@
+/* Main Note Play Function */
+
 int prevNote = 0;
 
 void playRandomNote() {

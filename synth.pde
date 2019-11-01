@@ -1,3 +1,7 @@
+/* Intruemnt Classes for Synth Instruments */
+
+// Some code taken from: http://code.compartmental.net/minim/instrument_instrument.html
+
 class PluckInstrument implements Instrument
 {
   // create all variables that must be used througout the class

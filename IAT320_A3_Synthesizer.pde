@@ -21,6 +21,8 @@ float BPM = 120;
 
 float targetBPM = BPM;
 
+float filterFreq;
+
 boolean playDab = false;
 boolean playPunch = false;
 
@@ -30,6 +32,7 @@ int timeSinceRemovedMovement = 0;
 
 int timeSinceDab = 0;
 int timeSincePunch = 0;
+
 
 ArrayList<Float>  movementArray = new ArrayList<Float>();  
 
@@ -100,7 +103,7 @@ void draw()
     println(movementArray.size());
   }
 
-  float filterFreq = map( movementArray.size(), 0, 30, 10, 5000 );
+  filterFreq = map( movementArray.size(), 0, 30, 10, 5000 );
   moog1.frequency.setLastValue(filterFreq);
 
   if (BPM != targetBPM) {
@@ -154,27 +157,6 @@ void draw()
               }
             }
 
-            //JSONObject mag = json.getJSONObject("mag");
-            //JSONObject acc = json.getJSONObject("acc");
-
-            //println("x: " + String.valueOf(constrain(mag.getInt("x"), 0, 300)));
-            //println("y: " + String.valueOf(constrain(mag.getInt("y"), 0, 300)));
-            //println("z: " + String.valueOf(constrain(mag.getInt("z"), 0, 300)));
-
-
-
-            //if(mag != null) {float[] magArray = {mag.getInt("x"), mag.getInt("y"), mag.getInt("z")};}
-
-            //if(acc != null){
-            //  JSONArray qmove = acc.getJSONArray("qmove");
-
-            //  if(qmove != null){ isMajor = true; println("moved");}
-            //  //else{ isMajor = false; println(qmove.getString(0));}
-            //}
-
-
-            //float filterFreq = constrain(map(avg, -35, 300, 10, 5000 ), 10, 5000);
-            //moog1.frequency.setLastValue(filterFreq);
           }
 
           //Reset buffer
@@ -186,19 +168,4 @@ void draw()
       }
     }
   }
-}
-
-void mouseMoved()
-{
-  // usually when setting the amplitude and frequency of an Oscil
-  // you will want to patch something to the amplitude and frequency inputs
-  // but this is a quick and easy way to turn the screen into
-  // an x-y control for them.
-
-  //float amp = map( mouseY, 0, height, 1, 0 );
-
-  float filterFreq = map( mouseY, 0, height, 10, 5000 );
-  if (noBTMode) moog1.frequency.setLastValue(filterFreq);
-
-  //float freq = map( mouseX, 0, width, 40, 880 );
 }
