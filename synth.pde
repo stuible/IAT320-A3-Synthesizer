@@ -12,8 +12,6 @@ class PluckInstrument implements Instrument
   // constructor for this instrument
   PluckInstrument( int note, float amplitude )
   {    
-    //println("instantiating note");
-
     // create new instances of any UGen objects as necessary
     sineOsc = new Oscil( 440, amplitude, Waves.SAW );
     adsr = new ADSR( 0.9, 0.01, 0.05, 0.05, 0.5 );
@@ -22,8 +20,6 @@ class PluckInstrument implements Instrument
     midi.patch( sineOsc.frequency );
     
     sineOsc.patch( adsr );
-    
-    //println("FINISHED instantiating note");
     
   }
 
@@ -58,7 +54,6 @@ class PunchInstrument implements Instrument
   // constructor for this instrument
   PunchInstrument( int note, float amplitude )
   {    
-    //println("instantiating note");
 
     // create new instances of any UGen objects as necessary
     sineOsc = new Oscil( 440, amplitude, Waves.SAW );
@@ -68,8 +63,6 @@ class PunchInstrument implements Instrument
     midi.patch( sineOsc.frequency );
     
     sineOsc.patch( adsr );
-    
-    //println("FINISHED instantiating note");
     
   }
 
